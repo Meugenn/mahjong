@@ -6,7 +6,7 @@ class Tile{
         this.type = 0;
         this.element = document.createElement("div");
         let cell = row.insertCell();
-        if((LAYERS[layer][x+1]&1<<y)===0){
+        if((LAYERS[layer][x+1]&1<<y)===0 && (x+1)===8){
             cell.rowSpan=2;
         }
         cell.append(this.element);
@@ -35,9 +35,9 @@ for(let layer = 0; layer<1; layer++){
             if((LAYERS[layer][i]&1<<j)===1<<j){
                 let t = new Tile(i, j, layer, row);
             }else{
-                if(i!==8){
-                    let c = row.insertCell(j)
-                    c.style.backgroundColor="red";
+                if(i!==8 || (LAYERS[layer][i-1]&1<<j)===0) {
+                    let c = row.insertCell()
+                    c.style.backgroundColor = "red";
                 }
 
             }
