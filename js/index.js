@@ -1,8 +1,13 @@
-import './utils'
-import './constains'
+import './utils.js'
+import './constains.js'
 
 let tiles = {}
-
+let types = {
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0
+}
 function isClickable (x, y, layer, tiles) {
     if (tiles[[x, y]]){
         if (layer >= maxLayer(tiles[[x, y]])) {
@@ -18,12 +23,15 @@ function isClickable (x, y, layer, tiles) {
     return false
 }
 
+
+
 class Tile{
     constructor(x, y, layer, root) {
         this.x = x;
         this.y = y;
         this.layer = layer;
         this.type = 0;
+        this.type_id = 0;
         this.element = document.createElement("img");
         this.element.src=`img/bamboo/${layer+1}.png`
         if(layer!==0){

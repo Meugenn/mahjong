@@ -88,4 +88,11 @@ const LAYERS=[
         0x00,
         0x00,
         0x00]
-]
+];
+
+const tile_type = {
+    0: "bamboo",
+    1: "numbers",
+    3: "symbols",
+    4: "winds"
+}
