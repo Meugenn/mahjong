@@ -27,7 +27,8 @@ class Tile{
 
         if((consts.LAYERS[layer][x+1]&1<<y)===0 && (x+1)===8){
             this.vert=true;
-            tiles[[this.x-1, this.y]]=[this]
+            tiles[[this.x+1, this.y]]=[this]
+            console.log(this.x+1, this.y)
             this.cell.style.top = `${x*51-layer*3+25}px`;
         }
         if(layer===consts.LAYERS.length-1){
@@ -44,9 +45,9 @@ class Tile{
             tiles[[this.x, this.y]]=undefined;
         }
         if(this.vert){
-            tiles[[this.x-1, this.y]].pop()
-            if(tiles[[this.x-1, this.y]].length===0){
-                tiles[[this.x-1, this.y]]=undefined;
+            tiles[[this.x+1, this.y]].pop()
+            if(tiles[[this.x+1, this.y]].length===0){
+                tiles[[this.x+1, this.y]]=undefined;
             }
         }
     }
@@ -61,8 +62,8 @@ class Tile{
 
     handle(cell){
         return ()=>{
+            console.log(this.x, this.y, this.layer)
             if (utils.isClickable(this.x, this.y, this.layer, tiles)) {
-                console.log(this.x, this.y, this.layer)
                 // TODO СЛАВА ПИРАТ
                 if(!selected){
                     selected=this;
@@ -93,7 +94,6 @@ for(let layer = 0; layer<5; layer++){
     root.className="root";
     root.style.top=`${layer}px`
     root.style.left=`${layer*2}px`
-    console.log(consts.LAYERS[layer])
     for (let i = 0; i < 16; i++){
         for (let j = 0; j < 16; j++){
             if((consts.LAYERS[layer][i]&1<<j)===1<<j){
