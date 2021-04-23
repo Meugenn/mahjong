@@ -1,12 +1,12 @@
-###Majong project
+### Majong project
 
-##authors
+## authors
 
 * Евгений Щербинин
 * Кабаков Артем
 * Гладких Святослав
 
-##frameworks
+## frameworks
 
 * [p5js](https://p5js.org/)
 
