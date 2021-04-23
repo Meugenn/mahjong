@@ -105,21 +105,45 @@ class Tile{
 
 let images = utils.generateImgArray()
 
-for(let layer = 0; layer<5; layer++){
-    let root = document.createElement("div");
-    root.className="root";
-    root.style.top=`${layer}px`
-    root.style.left=`${layer*2}px`
-    for (let i = 0; i < 16; i++){
-        for (let j = 0; j < 16; j++){
-            if((consts.LAYERS[layer][i]&1<<j)===1<<j){
-                let im_src = images[images.length - 1]
-                images.pop()
-                let t = new Tile(i, j, layer, root, im_src);
-                if (!tiles[[i, j]]) tiles[[i, j]] = []
-                tiles[[i, j]].push(t)
+
+
+function unfade(element) {
+    var op = 0.1;  // initial opacity
+    element.style.display = 'block';
+    var timer = setInterval(function () {
+        if (op >= 1){
+            clearInterval(timer);
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op += op * 0.1;
+    }, 20);
+}
+
+let layer = 0
+let animate = setInterval(() => {
+    if (layer == 5) {
+        clearInterval(animate)
+    } else {
+        let root = document.createElement("div");
+        root.className="root"
+        root.style.top=`${layer}px`
+        root.style.left=`${layer*2}px`
+        root.style.opacity=0
+        for (let i = 0; i < 16; i++){
+            for (let j = 0; j < 16; j++){
+                if((consts.LAYERS[layer][i]&1<<j)===1<<j){
+                    let im_src = images[images.length - 1]
+                    images.pop()
+                    let t = new Tile(i, j, layer, root, im_src)
+                    if (!tiles[[i, j]]) tiles[[i, j]] = []
+                    tiles[[i, j]].push(t)
+                }
             }
         }
+        document.body.append(root);
+        unfade(root)
+        layer++
     }
-    document.body.append(root);
-}
+
+},400)
