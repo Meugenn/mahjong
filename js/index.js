@@ -27,10 +27,10 @@ class Tile{
         cell.style.top = `${x*51-layer*3}px`;
         cell.style.left = `${y*40+layer*3+window.innerWidth/2-8*40}px`
 
-        if((LAYERS[layer][x+1]&1<<y)===0 && (x+1)===8){
+        if((consts.LAYERS[layer][x+1]&1<<y)===0 && (x+1)===8){
             cell.style.top = `${x*51-layer*3+25}px`;
         }
-        if(layer===LAYERS.length-1){
+        if(layer===consts.LAYERS.length-1){
             cell.style.left = `${y*40+layer*3+window.innerWidth/2-8.5*40}px`
         }
         cell.append(this.element);
@@ -49,7 +49,6 @@ class Tile{
     handle(cell){
         return ()=>{
             this.cell = cell;
-
             console.log(`x:${this.cell.x} y:${this.cell.y} z:${this.cell.layer}`)
         }
     }
@@ -61,10 +60,10 @@ for(let layer = 0; layer<5; layer++){
     root.className="root";
     root.style.top=`${layer}px`
     root.style.left=`${layer*2}px`
-    console.log(LAYERS[layer])
+    console.log(consts.LAYERS[layer])
     for (let i = 0; i < 16; i++){
         for (let j = 0; j < 16; j++){
-            if((LAYERS[layer][i]&1<<j)===1<<j){
+            if((consts.LAYERS[layer][i]&1<<j)===1<<j){
                 let t = new Tile(i, j, layer, root);
                 if (!tiles[[i, j]]) tiles[[i, j]] = []
                 tiles[[i, j]].push(t)
