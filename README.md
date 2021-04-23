@@ -1,4 +1,4 @@
-### Majong project
+# Majong project
 
 ## authors
 
