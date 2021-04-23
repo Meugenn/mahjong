@@ -1,4 +1,4 @@
-const LAYERS=[
+export const LAYERS=[
     [
         0x00,
         0x00,
