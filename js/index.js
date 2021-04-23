@@ -62,7 +62,7 @@ class Tile{
     handle(cell){
         return ()=>{
             if (utils.isClickable(this.x, this.y, this.layer, tiles)) {
-                alert("GREAT")
+                console.log(this.x, this.y, this.layer)
                 // TODO СЛАВА ПИРАТ
                 if(!selected){
                     selected=this;
