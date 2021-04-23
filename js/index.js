@@ -12,16 +12,20 @@ let types = {
 
 
 class Tile{
-    constructor(x, y, layer, root) {
+    constructor(x, y, layer, root, image_path=`img/bamboo/1.png`) {
         this.x = x;
         this.y = y;
         this.layer = layer;
         this.type = 0;
         this.element = document.createElement("img");
-        this.element.src=`img/bamboo/${layer+1}.png`
-        if(layer!==0){
-            this.element.style.backgroundColor="#fff";
+        if (image_path) {
+            this.element.src = image_path
+        } else {
+            this.element.src=`img/bamboo/${layer+1}.png`
         }
+        // if(layer!==0){
+        //     this.element.style.backgroundColor="#fff";
+        // }
         let cell = document.createElement("div");
         cell.className="cell";
         cell.style.top = `${x*51-layer*3}px`;
@@ -60,6 +64,8 @@ class Tile{
 }
 
 
+let images = utils.generateImgArray()
+
 for(let layer = 0; layer<5; layer++){
     let root = document.createElement("div");
     root.className="root";
@@ -69,7 +75,9 @@ for(let layer = 0; layer<5; layer++){
     for (let i = 0; i < 16; i++){
         for (let j = 0; j < 16; j++){
             if((consts.LAYERS[layer][i]&1<<j)===1<<j){
-                let t = new Tile(i, j, layer, root);
+                let im_src = images[images.length - 1]
+                images.pop()
+                let t = new Tile(i, j, layer, root, im_src);
                 if (!tiles[[i, j]]) tiles[[i, j]] = []
                 tiles[[i, j]].push(t)
             }

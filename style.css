@@ -9,6 +9,8 @@ img{
     width: 40px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+    /*background-color: rgb(231, 157, 163);*/
+    background-color: wheat;
 }
 img:hover{
     box-shadow: 0 0 10px rgba(0,0,0,1); /* Параметры тени */

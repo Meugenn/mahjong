@@ -19,3 +19,29 @@ export function isClickable (x, y, layer, tiles) {
     }
     return false
 }
+
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+export function generateImgArray () {
+    let arr = []
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 4; j++) {
+            arr.push(`./img/bamboo/${i % 9 + 1}.png`)
+            arr.push(`./img/bamboo/${i % 9 + 1}.png`)
+            arr.push(`./img/numbers/${i % 6 + 1}.png`)
+            arr.push(`./img/numbers/${i % 5 + 1}.png`)
+        }
+    }
+    while (arr.length < 144){
+        let s = arr[Math.round(Math.random()*arr.length)%arr.lenth]
+        arr.push(s)
+        arr.push(s)
+    }
+    return shuffle(arr)
+}
