@@ -55,10 +55,8 @@ class Tile{
             this.cell = cell;
             if (utils.isClickable(this.x, this.y, this.layer, tiles)) {
                 alert("GREAT")
-            } else {
-                alert ("BAD")
+                // TODO СЛАВА ПИРАТ
             }
-            // console.log(`x:${this.cell.x} y:${this.cell.y} z:${this.cell.layer}`)
         }
     }
 }
