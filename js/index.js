@@ -10,6 +10,7 @@ class Tile{
         this.x = x;
         this.y = y;
         this.layer = layer;
+        this.vert = false;
         this.element = document.createElement("img");
         if (image_path) {
             this.element.src = image_path
@@ -25,6 +26,8 @@ class Tile{
         this.cell.style.left = `${y*40+layer*3+window.innerWidth/2-8*40}px`
 
         if((consts.LAYERS[layer][x+1]&1<<y)===0 && (x+1)===8){
+            this.vert=true;
+            tiles[[this.x-1, this.y]]=[this]
             this.cell.style.top = `${x*51-layer*3+25}px`;
         }
         if(layer===consts.LAYERS.length-1){
@@ -36,6 +39,16 @@ class Tile{
     }
     delete(){
         this.cell.remove();
+        tiles[[this.x, this.y]].pop()
+        if(tiles[[this.x, this.y]].length===0){
+            tiles[[this.x, this.y]]=undefined;
+        }
+        if(this.vert){
+            tiles[[this.x-1, this.y]].pop()
+            if(tiles[[this.x-1, this.y]].length===0){
+                tiles[[this.x-1, this.y]]=undefined;
+            }
+        }
     }
 
     getType(){
@@ -56,22 +69,16 @@ class Tile{
                     this.element.style.backgroundColor="red";
                 }else{
                     if(this.compare(selected)){
-                        alert("del")
-                        let t = this.layer;
                         this.delete();
-                        tiles[[this.x, this.y]].pop()
-                        console.log("123")
-                        console.log(this)
-                        console.log(tiles[[this.x, this.y]])
-                        //index = tiles[[selected.x, selected.y]].indexOf(selected)
-                        //if(index > -1){
-                        //   tiles[[selected.x, selected.y]].splice(index, 1);
-                        //
+                        selected.delete();
+                    }else{
+                        selected.element.style.backgroundColor="white";
                     }
                     selected=0;
                 }
             }else {
                 console.log(tiles[[this.x, this.y]])
+                console.log(tiles)
                 alert("no")
             }
         }

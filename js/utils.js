@@ -13,10 +13,8 @@ export function isClickable (x, y, layer, tiles) {
         if (layer >= maxLayer(tiles[[x, y]])) {
             let t_right = tiles[[x, y+1]]
             let t_left = tiles[[x, y-1]]
-            let t_moved_left = !(maxLayer(tiles[[x-1, y-1]]) < layer)
-            let t_moved_right = !(maxLayer(tiles[[x-1, y+1]]) < layer)
-            if ((!t_left && x!==8 && t_moved_left)|| (maxLayer(t_left) < layer) || maxLayer(t_left) < layer ||
-                (!t_right && x!==8 && t_moved_right) || maxLayer(t_right) < layer
+            if ((!t_left)|| (maxLayer(t_left) < layer) || maxLayer(t_left) < layer ||
+                (!t_right) || maxLayer(t_right) < layer
                 ){
                 return true;
             }
@@ -44,7 +42,7 @@ export function generateImgArray () {
         }
     }
     while (arr.length < 144){
-        let s = arr[Math.round(Math.random()*arr.length)%arr.lenth]
+        let s = arr[Math.round(Math.random()*arr.length)%arr.length]
         arr.push(s)
         arr.push(s)
     }
