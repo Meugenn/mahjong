@@ -27,12 +27,17 @@ class Tile{
 
         if((consts.LAYERS[layer][x+1]&1<<y)===0 && (x+1)===8){
             this.vert=true;
-            tiles[[this.x+1, this.y]]=[this]
-            console.log(this.x+1, this.y)
+            if(!tiles[[this.x+1, this.y]]){
+                tiles[[this.x+1, this.y]] = [this]
+            }
+            tiles[[this.x+1, this.y]].push(this)
             this.cell.style.top = `${x*51-layer*3+25}px`;
         }
         if(layer===consts.LAYERS.length-1){
             this.cell.style.left = `${y*40+layer*3+window.innerWidth/2-8.5*40}px`
+            //tiles[[this.x+1, this.y]].push(this);
+            tiles[[this.x+1, this.y-1]].push(this);
+            tiles[[this.x,   this.y-1]]  .push(this);
         }
         this.cell.append(this.element);
         this.cell.addEventListener("click", this.handle(this));
@@ -40,12 +45,23 @@ class Tile{
     }
     delete(){
         this.cell.remove();
-        tiles[[this.x, this.y]].pop()
+        let layer = this.layer;
+        tiles[[this.x, this.y]] = tiles[[this.x, this.y]].filter((item)=> {
+            return item.layer !== layer;
+        })
         if(tiles[[this.x, this.y]].length===0){
             tiles[[this.x, this.y]]=undefined;
         }
+        if(this.layer===consts.LAYERS.length-1){
+            //tiles[[this.x+1, this.y]]   =  tiles[[this.x+1, this.y]].filter((item)=> {return item.layer !== layer;});
+            tiles[[this.x+1, this.y-1]] =  tiles[[this.x+1, this.y-1]].filter((item)=> {return item.layer !== layer;});
+            tiles[[this.x,   this.y-1]] =  tiles[[this.x,   this.y-1]].filter((item)=> {return item.layer !== layer;});
+        }
         if(this.vert){
-            tiles[[this.x+1, this.y]].pop()
+            tiles[[this.x+1, this.y]] = tiles[[this.x+1, this.y]].filter((item)=> {
+                return item.layer !== layer;
+            })
+            console.log(tiles[[this.x+1, this.y]])
             if(tiles[[this.x+1, this.y]].length===0){
                 tiles[[this.x+1, this.y]]=undefined;
             }
