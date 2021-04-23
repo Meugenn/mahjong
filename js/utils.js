@@ -7,6 +7,7 @@ function maxLayer (tiles){
     return max_l
 }
 
+
 export function isClickable (x, y, layer, tiles) {
     if (tiles[[x, y]]){
         if (layer >= maxLayer(tiles[[x, y]])) {

@@ -2,13 +2,7 @@ import * as utils from  './utils.js'
 import * as consts from './constains.js'
 
 let tiles = {}
-let types = {
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0
-}
-
+let selected;
 
 
 class Tile{
@@ -16,7 +10,6 @@ class Tile{
         this.x = x;
         this.y = y;
         this.layer = layer;
-        this.type = 0;
         this.element = document.createElement("img");
         if (image_path) {
             this.element.src = image_path
@@ -26,20 +19,23 @@ class Tile{
         // if(layer!==0){
         //     this.element.style.backgroundColor="#fff";
         // }
-        let cell = document.createElement("div");
-        cell.className="cell";
-        cell.style.top = `${x*51-layer*3}px`;
-        cell.style.left = `${y*40+layer*3+window.innerWidth/2-8*40}px`
+        this.cell = document.createElement("div");
+        this.cell.className="cell";
+        this.cell.style.top = `${x*51-layer*3}px`;
+        this.cell.style.left = `${y*40+layer*3+window.innerWidth/2-8*40}px`
 
         if((consts.LAYERS[layer][x+1]&1<<y)===0 && (x+1)===8){
-            cell.style.top = `${x*51-layer*3+25}px`;
+            this.cell.style.top = `${x*51-layer*3+25}px`;
         }
         if(layer===consts.LAYERS.length-1){
-            cell.style.left = `${y*40+layer*3+window.innerWidth/2-8.5*40}px`
+            this.cell.style.left = `${y*40+layer*3+window.innerWidth/2-8.5*40}px`
         }
-        cell.append(this.element);
-        cell.addEventListener("click", this.handle(this));
-        root.append(cell);
+        this.cell.append(this.element);
+        this.cell.addEventListener("click", this.handle(this));
+        root.append(this.cell);
+    }
+    delete(){
+        this.cell.remove();
     }
 
     getType(){
@@ -47,15 +43,36 @@ class Tile{
     }
 
     compare(another){
-        return (another.getType() === this.type);
+        return (another.element.src===this.element.src) && another!==this;
     }
 
     handle(cell){
         return ()=>{
-            this.cell = cell;
             if (utils.isClickable(this.x, this.y, this.layer, tiles)) {
                 alert("GREAT")
                 // TODO СЛАВА ПИРАТ
+                if(!selected){
+                    selected=this;
+                    this.element.style.backgroundColor="red";
+                }else{
+                    if(this.compare(selected)){
+                        alert("del")
+                        let t = this.layer;
+                        this.delete();
+                        tiles[[this.x, this.y]].pop()
+                        console.log("123")
+                        console.log(this)
+                        console.log(tiles[[this.x, this.y]])
+                        //index = tiles[[selected.x, selected.y]].indexOf(selected)
+                        //if(index > -1){
+                        //   tiles[[selected.x, selected.y]].splice(index, 1);
+                        //
+                    }
+                    selected=0;
+                }
+            }else {
+                console.log(tiles[[this.x, this.y]])
+                alert("no")
             }
         }
     }
