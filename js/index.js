@@ -49,7 +49,12 @@ class Tile{
     handle(cell){
         return ()=>{
             this.cell = cell;
-            console.log(`x:${this.cell.x} y:${this.cell.y} z:${this.cell.layer}`)
+            if (utils.isClickable(this.x, this.y, this.layer, tiles)) {
+                alert("GREAT")
+            } else {
+                alert ("BAD")
+            }
+            // console.log(`x:${this.cell.x} y:${this.cell.y} z:${this.cell.layer}`)
         }
     }
 }

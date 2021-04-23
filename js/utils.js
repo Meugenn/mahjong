@@ -9,12 +9,11 @@ function maxLayer (tiles){
 export function isClickable (x, y, layer, tiles) {
     if (tiles[[x, y]]){
         if (layer >= maxLayer(tiles[[x, y]])) {
-            let t_left = tiles[[x-1, y]]
-            if (!t_left || maxLayer(t_left) < layer){
-                let t_right = maxLayer(tiles[[x+1, y]])
-                if (!t_right || maxLayer(t_right) < layer){
-                    return true
-                }
+            let t_left = tiles[[x, y+1]]
+            let t_right = tiles[[x, y-1]]
+            if (!t_left || maxLayer(t_left) < layer ||
+                !t_right || maxLayer(t_right) < layer){
+                return true
             }
         }
     }
