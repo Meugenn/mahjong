@@ -1,3 +1,6 @@
+import './utils'
+import './constains'
+
 let tiles = {}
 
 function isClickable (x, y, layer) {
@@ -5,7 +8,7 @@ function isClickable (x, y, layer) {
         if (layer >= maxLayer(tiles[x, y])) {
             let t_left = tiles[x-1, y]
             if (!t_left || maxLayer(t_left) < layer){
-                let t_right = maxLayer()
+                let t_right = maxLayer(t_right)
             }
         }
     }
