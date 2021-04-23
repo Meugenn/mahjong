@@ -6,7 +6,4 @@
 * Кабаков Артем
 * Гладких Святослав
 
-## frameworks
-
-* [p5js](https://p5js.org/)
-
+### https://meugenn.github.io/mahjong/
