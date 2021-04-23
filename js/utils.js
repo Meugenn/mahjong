@@ -31,14 +31,20 @@ function shuffle(a) {
     return a;
 }
 
-export function generateImgArray () {
+export function generateImgArray (complexity=2) {
     let arr = []
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 4; j++) {
-            arr.push(`./img/bamboo/${i % 9 + 1}.png`)
-            arr.push(`./img/numbers/${i % 9 + 1}.png`)
-            arr.push(`./img/symbols/${i % 6 + 1}.png`)
-            arr.push(`./img/winds/${i % 5 + 1}.png`)
+            if (complexity == 0) {
+                arr.push(`./img/bamboo/1.png`)
+            } else if (complexity == 1) {
+                arr.push(`./img/bamboo/${i % 9 + 1}.png`)
+            } else {
+                arr.push(`./img/bamboo/${i % 9 + 1}.png`)
+                arr.push(`./img/numbers/${i % 9 + 1}.png`)
+                arr.push(`./img/symbols/${i % 6 + 1}.png`)
+                arr.push(`./img/winds/${i % 5 + 1}.png`)
+            }
         }
     }
     while (arr.length < 144){

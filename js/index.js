@@ -45,7 +45,8 @@ class Tile{
         root.append(this.cell);
     }
     delete(n=0){
-        this.cell.style.top = `${80}%`;
+        this.cell.style.bottom = `${5}%`;
+        this.cell.style.top = ''
         this.pos=window.innerWidth*0.1;
         this.cell.style.left = `${this.pos}px`;
         if(n===1){
@@ -53,7 +54,7 @@ class Tile{
             for(let i of checked){
                 i.pos+=45;
                 if(i.pos>window.innerWidth*0.9){
-                    this.cell.remove()
+                    i.cell.remove()
                 }
                 i.cell.style.left=`${i.pos}px`;
             }
@@ -111,11 +112,6 @@ class Tile{
     }
 }
 
-
-let images = utils.generateImgArray()
-
-
-
 function unfade(element) {
     var op = 0.1;  // initial opacity
     element.style.display = 'block';
@@ -129,30 +125,52 @@ function unfade(element) {
     }, 20);
 }
 
-let layer = 0
-let animate = setInterval(() => {
-    if (layer === 5) {
-        clearInterval(animate)
-    } else {
-        let root = document.createElement("div");
-        root.className="root"
-        root.style.top=`${layer}px`
-        root.style.left=`${layer*2}px`
-        root.style.opacity=0
-        for (let i = 0; i < 16; i++){
-            for (let j = 0; j < 16; j++){
-                if((consts.LAYERS[layer][i]&1<<j)===1<<j){
-                    let im_src = images[images.length - 1]
-                    images.pop()
-                    let t = new Tile(i, j, layer, root, im_src)
-                    if (!tiles[[i, j]]) tiles[[i, j]] = []
-                    tiles[[i, j]].push(t)
+
+function createField(complexity = 2){
+    let images = utils.generateImgArray(complexity)
+    let layer = 0
+    let main = document.createElement('div')
+    main.className = 'main'
+    document.body.append(main)
+    let animate = setInterval(() => {
+        if (layer === 5) {
+            clearInterval(animate)
+        } else {
+            let root = document.createElement("div");
+            root.className="root"
+            root.style.top=`${layer}px`
+            root.style.left=`${layer*2}px`
+            root.style.opacity=0
+            for (let i = 0; i < 16; i++){
+                for (let j = 0; j < 16; j++){
+                    if((consts.LAYERS[layer][i]&1<<j)===1<<j){
+                        let im_src = images[images.length - 1]
+                        images.pop()
+                        let t = new Tile(i, j, layer, root, im_src)
+                        if (!tiles[[i, j]]) tiles[[i, j]] = []
+                        tiles[[i, j]].push(t)
+                    }
                 }
             }
+            main.append(root)
+            unfade(root)
+            layer++
         }
-        document.body.append(root);
-        unfade(root)
-        layer++
-    }
 
-},400)
+    },400)
+}
+
+createField()
+
+export function changeComplexity(complexity=2) {
+    tiles = {}
+    let layers = document.getElementsByClassName("main")
+    for (let i=0; i < layers.length; i++) {
+        document.body.removeChild(layers[i])
+    }
+    createField(complexity)
+}
+
+document.getElementById("complexity-0").addEventListener("click", ()=>changeComplexity(0))
+document.getElementById("complexity-1").addEventListener("click", ()=>changeComplexity(1))
+document.getElementById("complexity-2").addEventListener("click", ()=>changeComplexity(2))
