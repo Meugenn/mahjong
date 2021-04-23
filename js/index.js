@@ -4,7 +4,6 @@ import * as consts from './constains.js'
 let tiles = {}
 let selected;
 
-
 class Tile{
     constructor(x, y, layer, root, image_path=`img/bamboo/1.png`) {
         this.x = x;
@@ -83,20 +82,20 @@ class Tile{
                 // TODO СЛАВА ПИРАТ
                 if(!selected){
                     selected=this;
-                    this.element.style.backgroundColor="red";
+
+                    this.element.style.backgroundColor="#a0f6ff";
                 }else{
                     if(this.compare(selected)){
                         this.delete();
                         selected.delete();
                     }else{
-                        selected.element.style.backgroundColor="white";
+                        selected.element.style.backgroundColor="rgba(255,243,220,1)";
                     }
                     selected=0;
                 }
             }else {
                 console.log(tiles[[this.x, this.y]])
                 console.log(tiles)
-                alert("no")
             }
         }
     }
