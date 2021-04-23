@@ -22,8 +22,8 @@ class Tile{
         }
         this.cell = document.createElement("div");
         this.cell.className="cell";
-        this.cell.style.top = `${x*51-layer*3}px`;
-        this.cell.style.left = `${y*40+layer*3+window.innerWidth/2-8*40}px`
+        this.cell.style.top = `${x*55-layer*4}px`;
+        this.cell.style.left = `${y*50+layer*4+window.innerWidth/2-8*40}px`
 
         if((consts.LAYERS[layer][x+1]&1<<y)===0 && (x+1)===8){
             this.vert=true;
@@ -31,10 +31,10 @@ class Tile{
                 tiles[[this.x+1, this.y]] = [this]
             }
             tiles[[this.x+1, this.y]].push(this)
-            this.cell.style.top = `${x*51-layer*3+25}px`;
+            this.cell.style.top = `${x*55-layer*4+25}px`;
         }
         if(layer===consts.LAYERS.length-1){
-            this.cell.style.left = `${y*40+layer*3+window.innerWidth/2-8.5*40}px`
+            this.cell.style.left = `${y*50+layer*4+window.innerWidth/2-8.5*41}px`
             //tiles[[this.x+1, this.y]].push(this);
             tiles[[this.x+1, this.y-1]].push(this);
             tiles[[this.x,   this.y-1]]  .push(this);
@@ -45,7 +45,7 @@ class Tile{
         root.append(this.cell);
     }
     delete(n=0){
-        this.cell.style.bottom = `${5}%`;
+        this.cell.style.bottom = `${2}%`;
         this.cell.style.top = ''
         this.pos=window.innerWidth*0.1;
         this.cell.style.left = `${this.pos}px`;
