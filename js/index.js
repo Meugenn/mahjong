@@ -1,3 +1,17 @@
+let tiles = {}
+
+function isClickable (x, y, layer) {
+    if (tiles[x, y]){
+        if (layer >= maxLayer(tiles[x, y])) {
+            let t_left = tiles[x-1, y]
+            if (!t_left || maxLayer(t_left) < layer){
+                let t_right = maxLayer()
+            }
+        }
+    }
+    return false
+}
+
 class Tile{
     constructor(x, y, layer, root) {
         this.x = x;
@@ -36,6 +50,7 @@ class Tile{
     handle(cell){
         return ()=>{
             this.cell = cell;
+
             console.log(`x:${this.cell.x} y:${this.cell.y} z:${this.cell.layer}`)
         }
     }
@@ -52,6 +67,8 @@ for(let layer = 0; layer<5; layer++){
         for (let j = 0; j < 16; j++){
             if((LAYERS[layer][i]&1<<j)===1<<j){
                 let t = new Tile(i, j, layer, root);
+                if (!tiles[[i, j]]) tiles[[i, j]] = []
+                tiles[[i, j]].push(t)
             }
         }
     }
