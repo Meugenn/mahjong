@@ -3,12 +3,15 @@ import './constains'
 
 let tiles = {}
 
-function isClickable (x, y, layer) {
-    if (tiles[x, y]){
-        if (layer >= maxLayer(tiles[x, y])) {
-            let t_left = tiles[x-1, y]
+function isClickable (x, y, layer, tiles) {
+    if (tiles[[x, y]]){
+        if (layer >= maxLayer(tiles[[x, y]])) {
+            let t_left = tiles[[x-1, y]]
             if (!t_left || maxLayer(t_left) < layer){
-                let t_right = maxLayer(t_right)
+                let t_right = maxLayer(tiles[[x+1, y]])
+                if (!t_right || maxLayer(t_right) < layer){
+                    return true
+                }
             }
         }
     }
