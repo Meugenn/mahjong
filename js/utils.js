@@ -7,6 +7,9 @@ function maxLayer (tiles){
     return max_l
 }
 
+function border(elem) {
+
+}
 
 export function isClickable (x, y, layer, tiles) {
     if (tiles[[x, y]]){
@@ -16,10 +19,13 @@ export function isClickable (x, y, layer, tiles) {
             if ((!t_left)|| (maxLayer(t_left) < layer) || maxLayer(t_left) < layer ||
                 (!t_right) || maxLayer(t_right) < layer
                 ){
+
                 return true;
+
             }
         }
     }
+    /**/
     return false;
 }
 

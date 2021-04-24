@@ -94,19 +94,29 @@ class Tile{
     handle(cell){
         return ()=>{
             if (utils.isClickable(this.x, this.y, this.layer, tiles)) {
-                if(!selected){
-                    selected=this;
+                if (!selected) {
+                    selected = this;
 
-                    this.element.style.backgroundColor="#a0f6ff";
-                }else{
-                    if(this.compare(selected)){
+                    this.element.style.backgroundColor = "#a0f6ff";
+                    this.element.style.border = "solid 1px #535bde";
+                    this.element.style.borderRadius = "6px";
+                } else {
+                    if (this.compare(selected)) {
                         this.delete();
                         selected.delete(1);
-                    }else{
-                        selected.element.style.backgroundColor="rgba(255,243,220,1)";
+                    } else {
+                        selected.element.style.backgroundColor = "rgba(255,243,220,1)";
+                        this.element.style.border = "none";
                     }
-                    selected=0;
+                    selected = 0;
                 }
+            } else {
+
+                this.element.style.borderRadius = "6px";
+                this.element.style.backgroundColor = "#de535e";
+                setTimeout(() => {
+                    this.element.style.backgroundColor = "rgba(255,243,220,1)";;
+                },300)
             }
         }
     }
