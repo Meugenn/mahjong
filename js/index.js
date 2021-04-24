@@ -97,8 +97,7 @@ class Tile{
                 if (!selected) {
                     selected = this;
 
-                    this.element.style.backgroundColor = "#a0f6ff";
-                    this.element.style.border = "solid 1px #535bde";
+                    this.element.style.border = "solid 2px #535bde";
                     this.element.style.borderRadius = "6px";
                 } else {
                     if (this.compare(selected)) {
@@ -106,7 +105,14 @@ class Tile{
                         selected.delete(1);
                     } else {
                         selected.element.style.backgroundColor = "rgba(255,243,220,1)";
-                        this.element.style.border = "none";
+                        selected.element.style.border = "solid 2px #535bde";
+                        this.element.style.border = "solid 2px #535bde";
+                        this.element.style.borderRadius = "6px";
+                        setTimeout(() => {
+                            this.element.style.borderRadius = "6px";
+                            this.element.style.border = "none";
+                        },300)
+                        selected.element.style.border = "none";
                     }
                     selected = 0;
                 }
@@ -115,7 +121,7 @@ class Tile{
                 this.element.style.borderRadius = "6px";
                 this.element.style.backgroundColor = "#de535e";
                 setTimeout(() => {
-                    this.element.style.backgroundColor = "rgba(255,243,220,1)";;
+                    this.element.style.backgroundColor = "rgba(255,243,220,1)";
                 },300)
             }
         }
