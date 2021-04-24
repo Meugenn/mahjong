@@ -101,8 +101,19 @@ class Tile{
                     this.element.style.borderRadius = "6px";
                 } else {
                     if (this.compare(selected)) {
-                        this.delete();
-                        selected.delete(1);
+                            this.delete();
+                            selected.delete(1);
+                        setTimeout(() => {
+                            let c = 0
+                            for (let i = 0; i < Object.values(tiles).length; i++) {
+                                if (Object.values(tiles)[i] == undefined) {
+                                    c++
+                                }
+                            }
+                            if (c == 90) {
+                                alert("Победа!")
+                            }
+                        },200)
                     } else {
                         selected.element.style.backgroundColor = "rgba(255,243,220,1)";
                         selected.element.style.border = "solid 2px #535bde";
