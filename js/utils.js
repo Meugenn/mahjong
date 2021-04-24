@@ -42,7 +42,7 @@ export function generateImgArray (complexity=2) {
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 4; j++) {
             if (complexity == 0) {
-                arr.push(`./img/bamboo/1.png`)
+                arr.push(`./img/tarik/1.png`)
             } else if (complexity == 1) {
                 arr.push(`./img/bamboo/${i % 9 + 1}.png`)
             } else {
