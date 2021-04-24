@@ -1,0 +1,35 @@
+tr, td{
+    border: 1px solid black;
+}
+td{
+    width: 40px;
+    height: 51px;
+}
+img{
+    width: 40px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+    /*background-color: rgb(231, 157, 163);*/
+    background-color: rgba(255,243,220,1);
+}
+img:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,1); /* Параметры тени */
+}
+.cell{
+    position: fixed;
+    transition: all .5s ease-in-out;
+}
+body{
+
+}
+.root{
+    position: absolute;
+    width: 100%;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+.complexity{
+    margin:0 5px;
+}
